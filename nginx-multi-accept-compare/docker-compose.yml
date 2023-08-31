@@ -1,0 +1,29 @@
+version: '3'
+services:
+  nginx_multi_accept_on:
+    image: nginx:alpine
+    volumes:
+      - ./nginx_multi_accept_on.conf:/etc/nginx/nginx.conf
+    ports:
+      - "81:80"
+    container_name: nginx_multi_accept_on
+    networks:
+      - nginx_network
+    cpus: '0.5'
+    mem_limit: 256m
+
+  nginx_multi_accept_off:
+    image: nginx:alpine
+    volumes:
+      - ./nginx_multi_accept_off.conf:/etc/nginx/nginx.conf
+    ports:
+      - "82:80"
+    container_name: nginx_multi_accept_off
+    networks:
+      - nginx_network
+    cpus: '0.5'
+    mem_limit: 256m
+
+networks:
+  nginx_network:
+    driver: bridge
